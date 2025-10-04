@@ -2,31 +2,30 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from .models import CustomUser, Company
 
+from .forms import CustomUserChangeForm
+
+
 class CustomUserAdmin(UserAdmin):
-    """
-    Configuration for the CustomUser model in the Django admin site.
-    """
+    # Use our custom form for the admin change view
+    form = CustomUserChangeForm
     model = CustomUser
-    # Add custom fields to the list display
-    list_display = ('username', 'email', 'first_name', 'last_name', 'role', 'company', 'is_staff')
-    # Add custom fields to the fieldsets for the add/change forms
+    list_display = ('username', 'email', 'company', 'role', 'is_staff')
+    list_filter = ('company', 'role', 'is_staff', 'is_superuser', 'is_active', 'groups')
+
     fieldsets = UserAdmin.fieldsets + (
-        ('Company Info', {'fields': ('company', 'role', 'manager')}),
+        ('Company Info', {'fields': ('company', 'role', 'managers')}),
     )
     add_fieldsets = UserAdmin.add_fieldsets + (
-        ('Company Info', {'fields': ('company', 'role', 'manager')}),
+        ('Company Info', {'fields': ('company', 'role')}),
     )
-    # Add filtering capabilities
-    list_filter = ('role', 'company', 'is_staff', 'is_superuser', 'groups')
-    search_fields = ('username', 'first_name', 'last_name', 'email')
-    ordering = ('username',)
+    filter_horizontal = ('managers',)
 
 @admin.register(Company)
 class CompanyAdmin(admin.ModelAdmin):
     """
     Configuration for the Company model in the Django admin site.
     """
-    list_display = ('name', 'phone_number', 'default_currency', 'created_at')
+    list_display = ('name', 'default_currency', 'created_at')
     search_fields = ('name', 'default_currency')
     ordering = ('name',)
 
