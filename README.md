@@ -8,8 +8,6 @@ It eliminates manual reimbursement inefficiencies by introducing automated workf
 The system is built with **Django (Python)** and **SQLite** on the backend, and a responsive **HTML, CSS, and JavaScript** frontend.
 It integrates with public APIs for currency data and includes an OCR-based receipt reader to automate expense creation.
 
----
-
 ## Problem Statement
 
 Organizations often face challenges with traditional expense reimbursement processes, such as:
@@ -25,8 +23,6 @@ This project addresses those challenges by enabling:
 * Role-based expense management
 * Dynamic approval rules and conditions
 * Integrated OCR for automated data extraction
-
----
 
 ## Key Features
 
@@ -44,8 +40,6 @@ This project addresses those challenges by enabling:
   * Assign or change user roles dynamically.
   * Define reporting hierarchies and approval sequences.
 
----
-
 ### 2. Expense Submission (Employee Role)
 
 * Employees can submit detailed expense claims with fields such as:
@@ -55,8 +49,6 @@ This project addresses those challenges by enabling:
   * Expense Date and Receipt Upload
 * View personal expense history (Approved, Rejected, Pending).
 * Automatic data extraction from uploaded receipts using OCR.
-
----
 
 ### 3. Approval Workflow (Manager/Admin Role)
 
@@ -69,8 +61,6 @@ This project addresses those challenges by enabling:
 * Each expense advances only after the current approver takes action.
 * Managers can view, approve, or reject pending expenses with comments.
 
----
-
 ### 4. Conditional Approval Logic
 
 Supports multiple approval rule types:
@@ -80,8 +70,6 @@ Supports multiple approval rule types:
 * **Hybrid Rule:** e.g., 60 % approval or CFO approval triggers final acceptance.
   The system can combine sequential and conditional rules to form hybrid workflows.
 
----
-
 ### 5. Role Permissions
 
 | Role         | Responsibilities                                                                                        |
@@ -90,15 +78,11 @@ Supports multiple approval rule types:
 | **Manager**  | Approve or reject expenses within their reporting hierarchy; escalate or comment as required.           |
 | **Employee** | Submit expenses, upload receipts, view approval history and current status.                             |
 
----
-
 ### 6. OCR-Based Receipt Processing
 
 * Uses a Python-based OCR engine (e.g., **Tesseract** or **EasyOCR**).
 * Extracts key fields such as amount, date, merchant name, and category.
 * Auto-populates form fields for rapid expense creation.
-
----
 
 ### 7. API Integrations
 
@@ -106,8 +90,6 @@ Supports multiple approval rule types:
 | ------------------- | ------------------------------------------------------------------------------ | ----------------------------------------------------------------- |
 | Country & Currency  | [RESTCountries API](https://restcountries.com/v3.1/all?fields=name,currencies) | Fetches country-currency mappings during signup.                  |
 | Currency Conversion | [ExchangeRate API](https://api.exchangerate-api.com/v4/latest/{BASE_CURRENCY}) | Converts foreign currency amounts to the company’s base currency. |
-
----
 
 ## System Architecture
 
@@ -121,8 +103,6 @@ Business Logic (Approval Rules, OCR Processing)
 SQLite Database
 ```
 
----
-
 ## Technology Stack
 
 | Layer        | Technology                  |
@@ -133,7 +113,6 @@ SQLite Database
 | **APIs**     | RESTCountries, ExchangeRate |
 | **OCR**      | Tesseract / EasyOCR         |
 
----
 
 ## Installation and Setup
 
@@ -173,8 +152,6 @@ python manage.py runserver
 
 Access the system at: [http://localhost:8000](http://localhost:8000)
 
----
-
 ## Future Enhancements
 
 * Email and in-app notifications for approval updates
@@ -182,8 +159,6 @@ Access the system at: [http://localhost:8000](http://localhost:8000)
 * Role-based access through JWT/Session APIs
 * Responsive mobile-first frontend
 * Integration with corporate accounting systems
-
----
 
 ## Evaluation Highlights
 
