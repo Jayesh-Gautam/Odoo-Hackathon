@@ -1,0 +1,36 @@
+{% extends 'accounts/base.html' %}
+
+{% block title %}Expense Approvals{% endblock %}
+
+{% block content %}
+<div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-4xl mx-auto">
+    <div class="flex justify-between items-center mb-6">
+        <h2 class="text-3xl font-extrabold text-gray-900">Pending Expense Approvals</h2>
+        <a href="{% url 'approval_history' %}" class="text-indigo-600 hover:text-indigo-900">View Approval History</a>
+    </div>
+    <div class="overflow-x-auto">
+        <table class="min-w-full bg-white">
+            <thead class="bg-gray-800 text-white">
+                <tr>
+                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Employee</th>
+                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Date</th>
+                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Amount</th>
+                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Actions</th>
+                </tr>
+            </thead>
+            <tbody class="text-gray-700">
+                {% for expense in expenses %}
+                <tr>
+                    <td class="text-left py-3 px-4">{{ expense.employee.username }}</td>
+                    <td class="text-left py-3 px-4">{{ expense.date }}</td>
+                    <td class="text-left py-3 px-4">{{ expense.amount }} {{ expense.currency }}</td>
+                    <td class="text-left py-3 px-4">
+                        <a href="{% url 'review_expense' expense.id %}" class="text-indigo-600 hover:text-indigo-900">Review</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
