@@ -167,5 +167,3 @@ Access the system at: [http://localhost:8000](http://localhost:8000)
 * Uses **live currency conversion** and **country-based company setup**.
 * Maintains clean architecture with Django ORM and SQLite for data integrity.
 * Fully developed using **open-source technologies** with focus on scalability and auditability.
-
-Would you like me to include a **short “Evaluation/Presentation Summary” section** (like those used in hackathon documentation) — summarizing problem–solution–impact in 3 crisp paragraphs for your submission PDF?
