@@ -11,15 +11,15 @@
         <p class="text-lg text-gray-700">From here, you can manage users and configure approval rules for your company.</p>
     </div>
 
-    <div class="mt-10 pt-6 border-t border-gray-200 flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
-        <a href="{% url 'admin:index' %}" class="inline-flex items-center px-6 py-3 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-gray-700 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-600 transition duration-150">
-            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
-            Django Admin Panel
-        </a>
-        <a href="{% url 'manager_approval_queue' %}" class="inline-flex items-center px-6 py-3 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-odoo-primary hover:bg-odoo-darker focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-odoo-primary transition duration-150">
-            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-            Manage Approvals Queue
-        </a>
+{#    <div class="mt-10 pt-6 border-t border-gray-200 flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">#}
+{#        <a href="{% url 'admin:index' %}" class="inline-flex items-center px-6 py-3 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-gray-700 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-600 transition duration-150">#}
+{#            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>#}
+{#            Django Admin Panel#}
+{#        </a>#}
+{#        <a href="{% url 'manager_approval_queue' %}" class="inline-flex items-center px-6 py-3 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-odoo-primary hover:bg-odoo-darker focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-odoo-primary transition duration-150">#}
+{#            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>#}
+{#            Manage Approvals Queue#}
+{#        </a>#}
     </div>
 </div>
 {% endblock %}
