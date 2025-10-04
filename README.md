@@ -152,6 +152,10 @@ python manage.py runserver
 
 Access the system at: [http://localhost:8000](http://localhost:8000)
 
+<img width="805" height="393" alt="image" src="https://github.com/user-attachments/assets/92c60a27-c022-4799-977f-8ad042f7d51f" />
+
+<img width="826" height="377" alt="image" src="https://github.com/user-attachments/assets/ee4915bb-69e0-4152-ad55-5b0ed4ffc4e5" />
+
 ## Future Enhancements
 
 * Email and in-app notifications for approval updates
