@@ -1,7 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from .models import CustomUser, Company
-
 from .forms import CustomUserChangeForm
 
 
@@ -20,14 +19,7 @@ class CustomUserAdmin(UserAdmin):
     )
     filter_horizontal = ('managers',)
 
-@admin.register(Company)
-class CompanyAdmin(admin.ModelAdmin):
-    """
-    Configuration for the Company model in the Django admin site.
-    """
-    list_display = ('name', 'default_currency', 'created_at')
-    search_fields = ('name', 'default_currency')
-    ordering = ('name',)
 
-# Register the CustomUser model with the custom admin class
 admin.site.register(CustomUser, CustomUserAdmin)
+admin.site.register(Company)
+
