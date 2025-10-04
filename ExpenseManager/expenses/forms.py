@@ -16,7 +16,7 @@ class ExpenseForm(forms.ModelForm):
         widgets = {
             # Apply styling to input fields
             'amount': forms.NumberInput(attrs=INPUT_STYLE),
-            'currency': forms.Select(attrs=INPUT_STYLE),
+            'currency': forms.TextInput(attrs=INPUT_STYLE),
             'description': forms.Textarea(attrs=TEXTAREA_STYLE),
             # Set the date input type and apply styling
             'date': forms.DateInput(attrs={'type': 'date', **INPUT_STYLE}),
