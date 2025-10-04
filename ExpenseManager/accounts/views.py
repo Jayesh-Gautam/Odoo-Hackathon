@@ -23,12 +23,17 @@ class SignupView(CreateView):
     def form_valid(self, form):
         # Create the company first
         company_name = form.cleaned_data.get('company_name')
-        company = Company.objects.create(name=company_name)
-
         # Now, save the user
         user = form.save(commit=False)
+
+        if Company.objects.filter(name=company_name).exists():
+            company = Company.objects.get(name=company_name)
+            user.role = CustomUser.Role.EMPLOYEE
+        else:
+            company = Company.objects.create(name=company_name)
+            user.role = CustomUser.Role.ADMIN
+
         user.is_staff = True  # Admins should have staff access
-        user.role = CustomUser.Role.ADMIN
         user.company = company
         user.save()
 
