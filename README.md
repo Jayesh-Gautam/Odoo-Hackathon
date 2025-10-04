@@ -157,6 +157,9 @@ Access the system at: [http://localhost:8000](http://localhost:8000)
 
 ![img2](https://github.com/user-attachments/assets/26dd6eb2-62e0-4b99-ac1e-5e3f27fd3949)
 
+
+![img3](https://github.com/user-attachments/assets/ecc1bdd6-399c-4aff-93f5-7d720ce127a4)
+
 ## Future Enhancements
 
 * Email and in-app notifications for approval updates
