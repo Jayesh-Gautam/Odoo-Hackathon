@@ -57,3 +57,9 @@ class CustomUserChangeForm(BaseUserChangeForm):
                 role__in=[CustomUser.Role.ADMIN, CustomUser.Role.MANAGER]
             ).exclude(pk=user_instance.pk)
 
+
+class EditRoleForm(forms.ModelForm):
+    class Meta:
+        model = CustomUser
+        fields = ['role']
+

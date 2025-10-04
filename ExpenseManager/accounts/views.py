@@ -1,13 +1,13 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, UpdateView
 from django.contrib.auth.views import LoginView as BaseLoginView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.db import transaction
 
 from .models import CustomUser, Company
-from .forms import CustomUserCreationForm, ProfileUpdateForm
+from .forms import CustomUserCreationForm, ProfileUpdateForm, EditRoleForm
 
 
 class SignupView(CreateView):
@@ -111,14 +111,35 @@ def dashboard_redirect(request):
 # --- Placeholder Dashboard Views ---
 # In a real app, these would be more complex views.
 
+@login_required
+@user_passes_test(lambda u: u.role == CustomUser.Role.ADMIN)
 def admin_dashboard(request):
-    return render(request, 'accounts/dashboard.html', {'role': 'Admin'})
+    company = request.user.company
+    employees = CustomUser.objects.filter(company=company)
+    return render(request, 'accounts/admin_dashboard.html', {'employees': employees})
 
 
+@login_required
+@user_passes_test(lambda u: u.role in [CustomUser.Role.MANAGER, CustomUser.Role.ADMIN])
 def manager_dashboard(request):
-    return render(request, 'accounts/dashboard.html', {'role': 'Manager'})
+    subordinates = request.user.subordinates.all()
+    return render(request, 'accounts/manager_dashboard.html', {'subordinates': subordinates})
 
 
 def employee_dashboard(request):
     return render(request, 'accounts/dashboard.html', {'role': 'Employee'})
+
+
+@login_required
+@user_passes_test(lambda u: u.role == CustomUser.Role.ADMIN)
+def edit_employee_role(request, pk):
+    employee = get_object_or_404(CustomUser, pk=pk, company=request.user.company)
+    if request.method == 'POST':
+        form = EditRoleForm(request.POST, instance=employee)
+        if form.is_valid():
+            form.save()
+            return redirect('admin_dashboard')
+    else:
+        form = EditRoleForm(instance=employee)
+    return render(request, 'accounts/edit_employee_role.html', {'form': form, 'employee': employee})
 

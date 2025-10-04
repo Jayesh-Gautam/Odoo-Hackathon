@@ -16,8 +16,10 @@ urlpatterns = [
     path('dashboard/manager/', views.manager_dashboard, name='manager_dashboard'),
     path('dashboard/employee/', views.employee_dashboard, name='employee_dashboard'),
 
+    # Edit employee role
+    path('employee/edit/<int:pk>/', views.edit_employee_role, name='edit_employee_role'),
+
     # Root path now redirects to the correct dashboard
     path('dashboard/', views.dashboard_redirect, name='dashboard_redirect'),
     path('', views.dashboard_redirect, name='accounts-home'),
 ]
-
