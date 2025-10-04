@@ -152,13 +152,15 @@ python manage.py runserver
 
 Access the system at: [http://localhost:8000](http://localhost:8000)
 
+## Visual Results
+
 ![img1](https://github.com/user-attachments/assets/583f23b6-a34a-44e7-8d09-848197d1107c)
 
 
 ![img2](https://github.com/user-attachments/assets/26dd6eb2-62e0-4b99-ac1e-5e3f27fd3949)
 
 
-![img3](https://github.com/user-attachments/assets/ecc1bdd6-399c-4aff-93f5-7d720ce127a4)
+![img3](https://github.com/user-attachments/assets/364a86af-ad7e-4290-a498-00868b090861)
 
 
 ![img4](https://github.com/user-attachments/assets/3e74ad4a-67f7-4900-b39e-b6a63bab61b8)
