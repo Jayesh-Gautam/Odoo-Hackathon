@@ -111,16 +111,14 @@ SQLite Database
 | **Backend**  | Django (Python)             |
 | **Database** | SQLite                      |
 | **APIs**     | RESTCountries, ExchangeRate |
-| **OCR**      | Tesseract / EasyOCR         |
-
 
 ## Installation and Setup
 
 ### 1. Clone Repository
 
 ```bash
-git clone https://github.com/<your-username>/expense-management-system.git
-cd expense-management-system
+git clone https://github.com/Jayesh-Gautam/Odoo-Hackathon.git
+cd ExpenseManager
 ```
 
 ### 2. Create Virtual Environment

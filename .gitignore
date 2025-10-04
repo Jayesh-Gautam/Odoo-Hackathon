@@ -1,3 +1,28 @@
-Odoo-Hackathon/myenv/
-Odoo-Hackathon/__pycache__/
-Odoo-Hackathon/extra/
+__pycache__/
+*.pyc
+*.pyd
+*.pyo
+*.egg-info/
+.pytest_cache/
+
+# Virtual environment (venv)
+venv/
+env/
+.env
+
+# Database files
+db.sqlite3
+*.sqlite3-journal
+
+# Django generated secrets
+local_settings.py
+settings_local.py
+
+# IDE and OS specific files
+.idea/
+*.iml
+*.iws
+
+# Operating System Files
+.DS_Store
+Thumbs.db

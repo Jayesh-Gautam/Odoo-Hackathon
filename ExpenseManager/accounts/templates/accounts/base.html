@@ -12,6 +12,10 @@
             --glow-color-1: #6366f1; /* Indigo */
             --glow-color-2: #14b8a6; /* Teal */
             --glow-color-3: #ec4899; /* Pink */
+            /* Define colors for the dark mode content areas */
+            --color-dark-text: #14171c; /* Dark text for light backgrounds */
+            --color-light-input: #c5eaea; /* Light input background color */
+            --color-medium-grey: #475569; /* Readable grey for helptext */
         }
 
         /* Custom scrollbar for a more modern look */
@@ -69,37 +73,6 @@
             border-bottom: 1px solid rgba(51, 65, 85, 0.5); /* slate-700 with alpha */
         }
 
-
-        /* Custom Form Styling for Dark Mode */
-        .form-fields p { margin-bottom: 1.25rem; }
-        .form-fields label {
-            display: block;
-            font-weight: 500;
-            color: #94a3b8; /* slate-400 */
-            margin-bottom: 0.5rem;
-            font-size: 0.875rem; /* text-sm */
-        }
-        .form-fields input:not([type="checkbox"]):not([type="submit"]):not([type="button"]),
-        .form-fields textarea,
-        .form-fields select {
-            width: 100%;
-            padding: 0.75rem 1rem;
-            border: 1px solid #334155; /* slate-700 */
-            background-color: #1e293b; /* slate-800 */
-            color: #e2e8f0; /* slate-200 */
-            border-radius: 0.5rem; /* rounded-lg */
-            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-            transition: all 0.2s ease-in-out;
-            font-size: 1rem;
-        }
-        .form-fields input:focus,
-        .form-fields select:focus,
-        .form-fields textarea:focus {
-            outline: none;
-            border-color: var(--glow-color-1);
-            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3); /* Indigo glow */
-        }
-
         /* Gradient text utility */
         .text-gradient {
             background: linear-gradient(90deg, var(--glow-color-1), var(--glow-color-2));
@@ -109,6 +82,86 @@
             text-fill-color: transparent;
         }
 
+        /* ====================================================
+        FIXED FORM STYLING (FOR LIGHT BACKGROUND IN CARDS)
+        ====================================================
+        */
+        .form-fields p { margin-bottom: 1.25rem; }
+        
+        /* FIX 1: Labels need to be dark for contrast against the white form card */
+        .form-fields label {
+            display: block;
+            font-weight: 500;
+            color: var(--color-dark-text); /* Ensure labels are dark */
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem; /* text-sm */
+        }
+        
+        /* FIX 2: Input fields need light background and dark text for contrast */
+        .form-fields input:not([type="checkbox"]):not([type="submit"]):not([type="button"]),
+        .form-fields textarea,
+        .form-fields select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #334155; /* slate-700 */
+            background-color: var(--color-light-input); /* Light input background */
+            color: var(--color-dark-text); /* Dark text inside the input box */
+            border-radius: 0.5rem; /* rounded-lg */
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            transition: all 0.2s ease-in-out;
+            font-size: 1rem;
+        }
+
+        /* FIX 3: Placeholder text color (grayish) */
+        .form-fields input::placeholder,
+        .form-fields textarea::placeholder {
+            color: #94a3b8; /* Readable grayish color */
+            opacity: 1; 
+        }
+
+        /* FIX 4: The instruction text (helptext) needs to be dark for readability */
+        .form-fields .helptext {
+            /* IMPORTANT: This targets the validation text underneath the fields */
+            color: var(--color-medium-grey) !important; /* Set to a solid dark grey */
+            font-size: 0.8rem !important;
+            margin-top: 0.25rem;
+            line-height: 1.4;
+        }
+        /* FIX 5: Error text color (ensure it's not blending) */
+        .form-fields ul.errorlist {
+            color: #ef4444 !important; /* Tailwind red-500 */
+            list-style: none;
+            padding-left: 0;
+            font-size: 0.8rem;
+        }
+        
+        .form-fields input:focus,
+        .form-fields select:focus,
+        .form-fields textarea:focus {
+            outline: none;
+            border-color: var(--glow-color-1);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3); /* Indigo glow */
+        }
+        .form-fields abbr[title="required"] {
+            color: #ef4444; 
+            text-decoration: none;
+        }
+
+        /* FIX 6: General content inside cards */
+        .card-content-area, .bg-white {
+            /* Keep background light/white for form pages */
+            background-color: #fff !important; 
+            color: var(--color-dark-text) !important; /* Ensure main text in cards is dark */
+        }
+        .card-content-area strong, 
+        .card-content-area h2, 
+        .card-content-area h3 {
+            color: var(--color-dark-text) !important; /* Ensure headings are dark */
+        }
+        /* Specific Fix: Table body text color (if used in light cards) */
+        .dark-table-body td {
+            color: var(--color-dark-text) !important; 
+        }
     </style>
 </head>
 <body class="bg-slate-900 text-slate-200 min-h-screen flex flex-col">
@@ -128,13 +181,13 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
                 <div class="flex-shrink-0">
-                    <a href="{% url 'index'  %}" class="text-3xl font-bold tracking-tighter text-gradient">
+                    <a href="{% url 'index' %}" class="text-3xl font-bold tracking-tighter text-gradient">
                         Expenso
                     </a>
                 </div>
                 <div class="flex items-center space-x-2 md:space-x-4">
                     {% if user.is_authenticated %}
-                        <a href="#" class="px-3 py-2 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-700/50 transition-colors flex items-center gap-2">
+                        <a href="{% url 'dashboard_redirect' %}" class="px-3 py-2 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-700/50 transition-colors flex items-center gap-2">
                             <svg class="w-5 h-5"><use href="#icon-dashboard"></use></svg>
                             <span class="hidden md:inline">Dashboard</span>
                         </a>
@@ -166,8 +219,21 @@
 
     <!-- Main Content -->
     <main class="flex-grow">
-        {% block content %}
-        {% endblock %}
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+            <!-- Messages/Alerts Area -->
+            {% if messages %}
+                <div class="space-y-4 mb-8">
+                {% for message in messages %}
+                    <div class="p-4 text-sm rounded-lg border {% if 'success' in message.tags %}text-green-300 bg-green-900/30 border-green-500/50{% elif 'error' in message.tags %}text-red-300 bg-red-900/30 border-red-500/50{% else %}text-yellow-300 bg-yellow-900/30 border-yellow-500/50{% endif %}" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+                </div>
+            {% endif %}
+
+            {% block content %}
+            {% endblock %}
+        </div>
     </main>
 
     <!-- Footer -->
