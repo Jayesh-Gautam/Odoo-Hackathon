@@ -1,0 +1,32 @@
+{% extends 'accounts/base.html' %}
+
+{% block title %}Review Expense{% endblock %}
+
+{% block content %}
+<div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-2xl mx-auto">
+    <h2 class="text-3xl font-extrabold text-gray-900 mb-6">Review Expense</h2>
+    
+    <div class="space-y-2 mb-6">
+        <p><strong>Employee:</strong> {{ expense.employee.username }}</p>
+        <p><strong>Date:</strong> {{ expense.date }}</p>
+        <p><strong>Amount:</strong> {{ expense.amount }} {{ expense.currency }}</p>
+        <p><strong>Description:</strong> {{ expense.description }}</p>
+        <p><strong>Overall Status:</strong> <span class="font-semibold">{{ expense.get_status_display }}</span></p>
+    </div>
+
+    <div class="bg-gray-50 p-4 rounded-lg mb-6">
+        <h3 class="text-lg font-bold text-gray-900 mb-2">Current Review Status:</h3>
+        <p>{{ expense.approvals.all.count }} out of {{ expense.employee.managers.count }} managers have reviewed.</p>
+        <ul>
+            <li><strong>Approved:</strong> {{ approved_count }}</li>
+            <li><strong>Rejected:</strong> {{ rejected_count }}</li>
+        </ul>
+    </div>
+
+    <form method="post" class="mt-6">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700">Submit Review</button>
+    </form>
+</div>
+{% endblock %}

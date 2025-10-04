@@ -1,0 +1,42 @@
+{% extends 'accounts/base.html' %}
+
+{% block title %}Approval History{% endblock %}
+
+{% block content %}
+<div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-4xl mx-auto">
+    <h2 class="text-3xl font-extrabold text-gray-900 mb-6">Your Approval History</h2>
+    <div class="overflow-x-auto">
+        <table class="min-w-full bg-white">
+            <thead class="bg-gray-800 text-white">
+                <tr>
+                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Employee</th>
+                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Date</th>
+                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Amount</th>
+                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Your Decision</th>
+                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Overall Status</th>
+                </tr>
+            </thead>
+            <tbody class="text-gray-700">
+                {% for expense in expenses %}
+                <tr>
+                    <td class="text-left py-3 px-4">{{ expense.employee.username }}</td>
+                    <td class="text-left py-3 px-4">{{ expense.date }}</td>
+                    <td class="text-left py-3 px-4">{{ expense.amount }} {{ expense.currency }}</td>
+                    <td class="text-left py-3 px-4">
+                        {% for approval in expense.approvals.all %}
+                            {% if approval.manager == request.user %}
+                                {{ approval.get_decision_display }}
+                            {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td class="text-left py-3 px-4">{{ expense.get_status_display }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="mt-6">
+        <a href="{% url 'expense_approvals' %}" class="text-indigo-600 hover:text-indigo-900">Back to Pending Approvals</a>
+    </div>
+</div>
+{% endblock %}
