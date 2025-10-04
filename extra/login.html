@@ -1,0 +1,27 @@
+{% extends 'accounts/base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="bg-white p-8 rounded-lg shadow-xl w-full max-w-md mx-auto border border-gray-100">
+    <h2 class="text-3xl font-extrabold text-center text-gray-900 mb-6 border-b pb-3">Login to Your Account</h2>
+    
+    <form method="post" class="space-y-6 form-fields">
+        {% csrf_token %}
+        
+        <div class="space-y-4">
+            {{ form.as_p }}
+        </div>
+        
+        <button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-lg text-sm font-medium text-white bg-odoo-primary hover:bg-odoo-darker focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-odoo-primary transition duration-150 ease-in-out">
+            Login
+        </button>
+    </form>
+    
+    <div class="mt-6 text-center">
+        <p class="text-sm text-gray-600">Don't have an account? 
+            <a href="{% url 'signup' %}" class="font-medium text-odoo-primary hover:text-odoo-darker">Sign Up</a>
+        </p>
+    </div>
+</div>
+{% endblock %}
