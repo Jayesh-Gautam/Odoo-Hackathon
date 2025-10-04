@@ -4,11 +4,11 @@
 
 {% block content %}
 <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md mx-auto">
-    <h2 class="text-3xl font-extrabold text-center text-gray-900 mb-6">Submit a New Expense</h2>
+    <h2 class="text-3xl font-extrabold text-center text-black mb-6">Submit a New Expense</h2>
 
     {% if ocr_data %}
-    <div class="bg-gray-100 p-4 rounded-lg mb-6">
-        <h3 class="text-lg font-bold text-gray-900 mb-2">Extracted Information from Receipt:</h3>
+    <div class="bg-gray-100 p-4 rounded-lg mb-6 text-black">
+        <h3 class="text-lg font-bold text-black mb-2">Extracted Information from Receipt:</h3>
         {% if ocr_data.amount %}
             <p><strong>Amount:</strong> {{ ocr_data.amount }}</p>
         {% endif %}
@@ -17,16 +17,16 @@
         {% endif %}
         <details>
             <summary>Raw Text</summary>
-            <p class="text-sm text-gray-600 mt-2">{{ ocr_data.raw_text }}</p>
+            <p class="text-sm mt-2">{{ ocr_data.raw_text }}</p>
         </details>
     </div>
     {% endif %}
 
-    <form method="post" enctype="multipart/form-data" class="space-y-6">
+    <form method="post" enctype="multipart/form-data" class="space-y-6 text-black">
         {% csrf_token %}
         {{ form.as_p }}
         <div>
-            <label for="receipt_image" class="block text-sm font-medium text-gray-700">Receipt Image</label>
+            <label for="receipt_image" class="block text-sm font-medium">Receipt Image</label>
             <input type="file" name="receipt_image" id="receipt_image" class="mt-1 block w-full">
         </div>
         <button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
