@@ -10,6 +10,10 @@ from .models import CustomUser, Company
 from .forms import CustomUserCreationForm, ProfileUpdateForm, EditRoleForm
 
 
+def index(request):
+    return render(request, 'accounts/index.html')
+
+
 class SignupView(CreateView):
     """
     Handles user registration.

@@ -1,0 +1,24 @@
+{% extends 'accounts/base.html' %}
+
+{% block title %}Welcome{% endblock %}
+
+{% block content %}
+<div class="bg-white p-8 rounded-lg shadow-lg text-center">
+    <h2 class="text-4xl font-extrabold text-gray-900">Welcome to the Expense Manager</h2>
+    <p class="mt-4 text-lg text-gray-600">Your one-stop solution for managing company expenses.</p>
+    <div class="mt-6">
+        {% if user.is_authenticated %}
+            <a href="{% url 'dashboard_redirect' %}" class="text-indigo-600 hover:text-indigo-900">Go to your Dashboard</a>
+            <br>
+            <a href="{% url 'expense_history' %}" class="text-indigo-600 hover:text-indigo-900">View Your Expenses</a>
+            {% if user.role == 'ADMIN' or user.role == 'MANAGER' %}
+                <br>
+                <a href="{% url 'expense_approvals' %}" class="text-indigo-600 hover:text-indigo-900">Approve Expenses</a>
+            {% endif %}
+        {% else %}
+            <a href="{% url 'login' %}" class="text-indigo-600 hover:text-indigo-900">Login</a> or
+            <a href="{% url 'signup' %}" class="text-indigo-600 hover:text-indigo-900">Sign Up</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

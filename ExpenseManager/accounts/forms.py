@@ -2,25 +2,38 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm as BaseUserChangeForm
 from .models import CustomUser, Company
 
+# Define common styling for form inputs
+text_input_styles = {
+    'class': 'mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
+}
+
 class CustomUserCreationForm(UserCreationForm):
-    """
-    A form for creating new users. Includes a field for company name
-    to create a new company during signup.
-    """
-    company_name = forms.CharField(max_length=100, help_text='The name of your company.')
+    company_name = forms.CharField(max_length=100, help_text='The name of your company.', widget=forms.TextInput(attrs=text_input_styles))
 
     class Meta(UserCreationForm.Meta):
         model = CustomUser
         fields = UserCreationForm.Meta.fields + ('email',)
+        widgets = {
+            'username': forms.TextInput(attrs=text_input_styles),
+            'email': forms.EmailInput(attrs=text_input_styles),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super(CustomUserCreationForm, self).__init__(*args, **kwargs)
+        self.fields['password2'].widget.attrs.update(text_input_styles)
+        self.fields['password1'].widget.attrs.update(text_input_styles)
+
 
 class ProfileUpdateForm(forms.ModelForm):
-    """
-    A form for updating user profiles. It dynamically adjusts the 'managers'
-    field based on the user's role and permissions.
-    """
     class Meta:
         model = CustomUser
         fields = ['first_name', 'last_name', 'email', 'managers']
+        widgets = {
+            'first_name': forms.TextInput(attrs=text_input_styles),
+            'last_name': forms.TextInput(attrs=text_input_styles),
+            'email': forms.EmailInput(attrs=text_input_styles),
+            'managers': forms.SelectMultiple(attrs=text_input_styles),
+        }
 
     def __init__(self, *args, **kwargs):
         self.request_user = kwargs.pop('request_user', None)
@@ -39,8 +52,8 @@ class ProfileUpdateForm(forms.ModelForm):
         else:
             del self.fields['managers']
 
+
 class CustomUserChangeForm(BaseUserChangeForm):
-    """A form for updating users in the admin, with filtered manager choices."""
     class Meta(BaseUserChangeForm.Meta):
         model = CustomUser
         fields = '__all__'
@@ -49,9 +62,7 @@ class CustomUserChangeForm(BaseUserChangeForm):
         super().__init__(*args, **kwargs)
         user_instance = self.instance
 
-        # Ensure the 'managers' field exists and the user belongs to a company
         if 'managers' in self.fields and user_instance and user_instance.company:
-            # Only Admins and Managers from the same company can be managers
             self.fields['managers'].queryset = CustomUser.objects.filter(
                 company=user_instance.company,
                 role__in=[CustomUser.Role.ADMIN, CustomUser.Role.MANAGER]
@@ -62,4 +73,6 @@ class EditRoleForm(forms.ModelForm):
     class Meta:
         model = CustomUser
         fields = ['role']
-
+        widgets = {
+            'role': forms.Select(attrs=text_input_styles),
+        }

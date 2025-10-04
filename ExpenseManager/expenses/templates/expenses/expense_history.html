@@ -4,7 +4,10 @@
 
 {% block content %}
 <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-4xl mx-auto">
-    <h2 class="text-3xl font-extrabold text-gray-900 mb-6">Your Expense History</h2>
+    <div class="flex justify-between items-center mb-6">
+        <h2 class="text-3xl font-extrabold text-gray-900">Your Expense History</h2>
+        <a href="{% url 'submit_expense' %}" class="text-white bg-indigo-600 hover:bg-indigo-700 py-2 px-4 rounded-md">Create New Expense</a>
+    </div>
     <div class="overflow-x-auto">
         <table class="min-w-full bg-white">
             <thead class="bg-gray-800 text-white">
